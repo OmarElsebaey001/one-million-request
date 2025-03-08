@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_NAME=asset_db
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+      - SECRET_KEY=django-insecure-h6f3j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z3
+      - DEBUG=False
+    volumes:
+      - static_volume:/app/staticfiles
+    networks:
+      - asset-network
+
+  db:
+    image: postgres:14
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=asset_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - asset-network
+
+networks:
+  asset-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  static_volume:
