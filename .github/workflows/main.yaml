@@ -26,8 +26,8 @@ jobs:
           aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 024881612673.dkr.ecr.eu-west-1.amazonaws.com
           cd django_asset_project
           docker build  . \
-            -t 024881612673.dkr.ecr.eu-west-1.amazonaws.com/one_million_request:latest
+            -t 024881612673.dkr.ecr.eu-west-1.amazonaws.com/one-million-request:latest
 
       - name: Push Docker image to ECR
         run: |
-          docker push 024881612673.dkr.ecr.eu-west-1.amazonaws.com/one_million_request:latest
+          docker push 024881612673.dkr.ecr.eu-west-1.amazonaws.com/one-million-request:latest
