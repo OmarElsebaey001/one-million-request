@@ -14,4 +14,3 @@ class AssetDetailView(generics.RetrieveAPIView):
     """
     queryset = Asset.objects.all()
     serializer_class = AssetSerializer
-    permission_classes = [permissions.IsAuthenticated]
