@@ -94,7 +94,6 @@ DATABASES = {
 
 # PostgreSQL configuration (commented out for now)
 # When ready to use PostgreSQL, uncomment this section
-'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -105,7 +104,6 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
-'''
 
 
 # Password validation

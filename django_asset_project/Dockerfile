@@ -28,18 +28,6 @@ EXPOSE 8000
 COPY docker-entrypoint.sh /app/docker-entrypoint.sh
 RUN chmod +x /app/docker-entrypoint.sh
 
-# Create PostgreSQL check script
-RUN echo '#!/bin/sh\n\
-echo "Waiting for PostgreSQL..."\n\
-while ! pg_isready -h $DB_HOST -p $DB_PORT -U $DB_USER; do\n\
-  sleep 1\n\
-done\n\
-echo "PostgreSQL started"\n\
-\n\
-exec "$@"' > /app/wait-for-postgres.sh && chmod +x /app/wait-for-postgres.sh
-
-# Set entrypoint
-ENTRYPOINT ["/app/wait-for-postgres.sh", "/app/docker-entrypoint.sh"]
 
 # Run gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "asset_project.wsgi:application"]
+CMD ["sh", "/app/docker-entrypoint.sh"]
